@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'login_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -252,12 +251,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         Container(height: 10),
                         ElevatedButton(
-                          onPressed: () async {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        const LoginPage()));
+                          onPressed: () {
+                             Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/login/', (route) => false);
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.deepPurple.shade200,
