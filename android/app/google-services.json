@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "353789652424",
+    "project_id": "flutstar-social-application",
+    "storage_bucket": "flutstar-social-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353789652424:android:901cc02951303c290e24fd",
+        "android_client_info": {
+          "package_name": "com.flutstar.flutstar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353789652424-3riv9a94i9m3aan3t84bekmci7t7l4h1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9RJIwuCg_DLgo1wObzJ_kTY2U1sfB2Cg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353789652424-3riv9a94i9m3aan3t84bekmci7t7l4h1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
