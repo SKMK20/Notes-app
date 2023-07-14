@@ -29,30 +29,25 @@ void main() async {
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
-            if (snapshot.hasData) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.done:
               final user = FirebaseAuth.instance.currentUser;
               if (user != null) {
                 if (user.emailVerified) {
-                  print('Email is verified');
+                  return const NavigationPage();
+                } else {
+                  return const VerifyEmailPage();
                 }
               } else {
-                return const VerifyEmailPage();
+                return const LoginPage();
               }
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text('${snapshot.error}'),
+              case ConnectionState.active:
+              return const NavigationPage();
+            default:
+              return const Center(
+                child: CircularProgressIndicator(),
               );
-            } else {
-              return const LoginPage();
-            }
           }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          return const NavigationPage();
         },
       ),
       routes: {
