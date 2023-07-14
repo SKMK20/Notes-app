@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:developer' as devtools show log;
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -218,16 +219,16 @@ class _SignUpPageState extends State<SignUpPage> {
                                     .instance
                                     .createUserWithEmailAndPassword(
                                         email: email, password: password);
-                                print(userCredential.toString());
+                                devtools.log(userCredential.toString());
                               } on FirebaseAuthException catch (e) {
                                 if (e.code == 'email-already-in-use') {
-                                  print('Email is already in use');
+                                  devtools.log('Email is already in use');
                                 } else if (e.code == 'invalid-email') {
-                                  print('Invalid email');
+                                  devtools.log('Invalid email');
                                 } else if (e.code == 'weak-password') {
-                                  print('Password is too weak');
+                                  devtools.log('Password is too weak');
                                 } else if (e.code == 'operation-not-allowed') {
-                                  print('Something went wrong');
+                                  devtools.log('Something went wrong');
                                 }
                               }
                             }

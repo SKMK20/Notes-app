@@ -52,7 +52,8 @@ void main() async {
       ),
       routes: {
         '/login/': (context) => const LoginPage(),
-        '/signup/': (context) => const SignUpPage()
+        '/signup/': (context) => const SignUpPage(),
+        '/navigation/': (context) => const NavigationPage(),
       },
     ),
   );

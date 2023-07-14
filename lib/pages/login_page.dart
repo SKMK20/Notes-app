@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:developer' as devtools show log;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -185,20 +186,24 @@ class _LoginPageState extends State<LoginPage> {
                               final email = _email.text;
                               final password = _password.text;
                               try {
-                                final userCredential = await FirebaseAuth
-                                    .instance
+                                await FirebaseAuth.instance
                                     .signInWithEmailAndPassword(
-                                        email: email, password: password);
-                                print(userCredential.toString());
+                                  email: email,
+                                  password: password,
+                                );
+                                if (!mounted) return;
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    '/navigation/', (route) => false);
                               } on FirebaseAuthException catch (e) {
                                 if (e.code == 'user-not-found') {
-                                  print('User not found');
+                                  devtools.log('User not found');
                                 } else if (e.code == 'wrong-password') {
-                                  print('Wrong password');
+                                  devtools.log('Wrong password');
                                 } else if (e.code == 'invalid-email') {
-                                  print('Invalid email');
+                                  devtools.log('Invalid email');
                                 } else if (e.code == 'user-disabled') {
-                                  print('This email is no longer in use');
+                                  devtools
+                                      .log('This email is no longer in use');
                                 }
                               }
                             }
