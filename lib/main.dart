@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutstar/pages/navigation_page.dart';
+import 'package:flutstar/pages/verifyemail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'firebase_options.dart';
 import 'pages/login_page.dart';
+import 'pages/navigation_page.dart';
 
 void main() async {
   // To use firebase in our app this is must with platform options.
@@ -31,11 +32,12 @@ void main() async {
             if (snapshot.hasData) {
               final user = FirebaseAuth.instance.currentUser;
               if (user?.emailVerified ?? false) {
-                print('You are a verified user');
+                // print('You are a verified user');
+                return const NavigationPage();
               } else {
-                print('You need to verify your email');
+                // print('You need to verify your email');
+                return const VerifyEmailPage();
               }
-              return const NavigationPage();
             } else if (snapshot.hasError) {
               return Center(
                 child: Text('${snapshot.error}'),
