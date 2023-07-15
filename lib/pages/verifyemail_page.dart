@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutstar/services/auth/auth_service.dart';
 import 'package:flutstar/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -24,14 +24,13 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
               'If you haven\' received a verification mail yet. press the button below'),
           ElevatedButton(
             onPressed: () async {
-              final user = FirebaseAuth.instance.currentUser;
-              await user?.sendEmailVerification();
+              await AuthService.firebase().sendEmailVerification();
             },
-            child: const Text('Send code'),
+            child: const Text('Send email verification'),
           ),
           ElevatedButton(
             onPressed: () async {
-              await FirebaseAuth.instance.signOut();
+              await AuthService.firebase().logOut();
               if (!mounted) return;
               Navigator.of(context)
                   .pushNamedAndRemoveUntil(signupRoute, (route) => false);

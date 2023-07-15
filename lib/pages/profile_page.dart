@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutstar/services/auth/auth_service.dart';
 import 'package:flutstar/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-enum SampleItem { settings, editProfile, signOut }
+enum ProfileMenuAction { settings, editProfile, signOut }
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -12,7 +12,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  SampleItem? selectedMenu;
+  ProfileMenuAction? selectedMenu;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -88,33 +88,34 @@ class _ProfilePageState extends State<ProfilePage> {
             Positioned(
               top: 215,
               right: 1,
-              child: PopupMenuButton<SampleItem>(
+              child: PopupMenuButton<ProfileMenuAction>(
                 initialValue: selectedMenu,
                 onSelected: (item) async {
                   switch (item) {
-                    case SampleItem.signOut:
+                    case ProfileMenuAction.signOut:
                       final shouldSignOut = await showSignOutDialog(context);
                       if (shouldSignOut) {
-                        await FirebaseAuth.instance.signOut();
+                        await AuthService.firebase().logOut();
                         if (!mounted) return;
                         Navigator.of(context).pushNamedAndRemoveUntil(
                             loginRoute, (route) => false);
                       }
-                    default: null;
+                    default:
+                      null;
                   }
                 },
                 itemBuilder: (BuildContext context) =>
-                    <PopupMenuEntry<SampleItem>>[
-                  const PopupMenuItem<SampleItem>(
-                    value: SampleItem.settings,
+                    <PopupMenuEntry<ProfileMenuAction>>[
+                  const PopupMenuItem<ProfileMenuAction>(
+                    value: ProfileMenuAction.settings,
                     child: Text('Settings and privacy'),
                   ),
-                  const PopupMenuItem<SampleItem>(
-                    value: SampleItem.editProfile,
+                  const PopupMenuItem<ProfileMenuAction>(
+                    value: ProfileMenuAction.editProfile,
                     child: Text('Edit profile'),
                   ),
-                  const PopupMenuItem<SampleItem>(
-                    value: SampleItem.signOut,
+                  const PopupMenuItem<ProfileMenuAction>(
+                    value: ProfileMenuAction.signOut,
                     child: Text('Sign out'),
                   ),
                 ],

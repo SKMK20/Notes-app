@@ -1,4 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutstar/services/auth/auth_exceptions.dart';
+import 'package:flutstar/services/auth/auth_service.dart';
 import 'package:flutstar/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -186,41 +187,34 @@ class _LoginPageState extends State<LoginPage> {
                               final email = _email.text;
                               final password = _password.text;
                               try {
-                                await FirebaseAuth.instance
-                                    .signInWithEmailAndPassword(
+                                await AuthService.firebase().logIn(
                                   email: email,
                                   password: password,
                                 );
-                                final user = FirebaseAuth.instance.currentUser;
-                                if (user?.emailVerified ?? false) {
+                                final user = AuthService.firebase().currentUser;
+                                if (user?.isEmailVerified ?? false) {
                                   if (!mounted) return;
-                                Navigator.of(context).pushNamedAndRemoveUntil(
-                                    navigationRoute, (route) => false);
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      navigationRoute, (route) => false);
                                 } else {
                                   if (!mounted) return;
-                                Navigator.of(context).pushNamedAndRemoveUntil(
-                                    verifyEmailRoute, (route) => false);
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      verifyEmailRoute, (route) => false);
                                 }
-                                
-                              } on FirebaseAuthException catch (e) {
-                                if (e.code == 'user-not-found') {
-                                  await showErrorDialog(
-                                      context, 'User not found');
-                                } else if (e.code == 'wrong-password') {
-                                  await showErrorDialog(
-                                      context, 'Wrong password');
-                                } else if (e.code == 'invalid-email') {
-                                  await showErrorDialog(
-                                      context, 'Invalid email');
-                                } else if (e.code == 'user-disabled') {
-                                  await showErrorDialog(context,
-                                      'This email is no longer in use');
-                                } else {
-                                  await showErrorDialog(
-                                      context, 'Error: ${e.code}');
-                                }
-                              } catch (e) {
-                                await showErrorDialog(context, e.toString());
+                              } on UserNotFoundAuthException {
+                                await showErrorDialog(
+                                    context, 'User not found');
+                              } on WrongPasswordAuthException {
+                                await showErrorDialog(
+                                    context, 'Wrong password');
+                              } on InvalidEmailAuthException {
+                                await showErrorDialog(context, 'Invalid email');
+                              } on UserDisabledAuthException {
+                                await showErrorDialog(
+                                    context, 'This email is no longer in use');
+                              } on GenericAuthException {
+                                await showErrorDialog(
+                                    context, 'Authentication error');
                               }
                             }
                           },
@@ -272,5 +266,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-
