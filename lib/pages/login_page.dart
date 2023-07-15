@@ -191,9 +191,17 @@ class _LoginPageState extends State<LoginPage> {
                                   email: email,
                                   password: password,
                                 );
-                                if (!mounted) return;
+                                final user = FirebaseAuth.instance.currentUser;
+                                if (user?.emailVerified ?? false) {
+                                  if (!mounted) return;
                                 Navigator.of(context).pushNamedAndRemoveUntil(
                                     navigationRoute, (route) => false);
+                                } else {
+                                  if (!mounted) return;
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    verifyEmailRoute, (route) => false);
+                                }
+                                
                               } on FirebaseAuthException catch (e) {
                                 if (e.code == 'user-not-found') {
                                   await showErrorDialog(
