@@ -33,9 +33,9 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
               await AuthService.firebase().logOut();
               if (!mounted) return;
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil(signupRoute, (route) => false);
+                  .pushNamedAndRemoveUntil(loginRoute, (route) => false);
             },
-            child: const Text('Restart'),
+            child: const Text('Verified'),
           ),
         ],
       ),
