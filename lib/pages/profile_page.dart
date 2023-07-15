@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutstar/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 enum SampleItem { settings, editProfile, signOut }
@@ -97,7 +98,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         await FirebaseAuth.instance.signOut();
                         if (!mounted) return;
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/login/', (route) => false);
+                            loginRoute, (route) => false);
                       }
                     default: null;
                   }

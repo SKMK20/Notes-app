@@ -12,6 +12,11 @@ List<Widget> navigationItems = [
   const ProfilePage(),
 ];
 
+// Routes
+const loginRoute = '/login/';
+const signupRoute = '/signup/';
+const navigationRoute = '/navigation/';
+
 // For snackbar messages
 void showSnackbar(BuildContext context, String msg) {
   ScaffoldMessenger.of(context).showSnackBar(

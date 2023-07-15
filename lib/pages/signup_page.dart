@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutstar/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -254,7 +255,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ElevatedButton(
                           onPressed: () {
                              Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/login/', (route) => false);
+                                loginRoute, (route) => false);
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.deepPurple.shade200,

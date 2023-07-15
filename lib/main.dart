@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutstar/pages/navigation_page.dart';
 import 'package:flutstar/pages/signup_page.dart';
 import 'package:flutstar/pages/verifyemail_page.dart';
+import 'package:flutstar/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'firebase_options.dart';
@@ -51,9 +52,9 @@ void main() async {
         },
       ),
       routes: {
-        '/login/': (context) => const LoginPage(),
-        '/signup/': (context) => const SignUpPage(),
-        '/navigation/': (context) => const NavigationPage(),
+        loginRoute: (context) => const LoginPage(),
+        signupRoute: (context) => const SignUpPage(),
+        navigationRoute: (context) => const NavigationPage(),
       },
     ),
   );

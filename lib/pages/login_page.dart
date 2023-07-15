@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutstar/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as devtools show log;
@@ -193,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                                 );
                                 if (!mounted) return;
                                 Navigator.of(context).pushNamedAndRemoveUntil(
-                                    '/navigation/', (route) => false);
+                                    navigationRoute, (route) => false);
                               } on FirebaseAuthException catch (e) {
                                 if (e.code == 'user-not-found') {
                                   devtools.log('User not found');
@@ -229,7 +230,7 @@ class _LoginPageState extends State<LoginPage> {
                         ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/signup/', (route) => false);
+                                signupRoute, (route) => false);
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.deepPurple.shade200,
