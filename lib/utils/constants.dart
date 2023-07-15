@@ -16,6 +16,7 @@ List<Widget> navigationItems = [
 const loginRoute = '/login/';
 const signupRoute = '/signup/';
 const navigationRoute = '/navigation/';
+const verifyEmailRoute = '/verify-email/';
 
 // For snackbar messages
 void showSnackbar(BuildContext context, String msg) {

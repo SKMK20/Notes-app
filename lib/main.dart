@@ -55,6 +55,7 @@ void main() async {
         loginRoute: (context) => const LoginPage(),
         signupRoute: (context) => const SignUpPage(),
         navigationRoute: (context) => const NavigationPage(),
+        verifyEmailRoute:(context) => const VerifyEmailPage(),
       },
     ),
   );
