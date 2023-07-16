@@ -1,3 +1,4 @@
+import 'package:flutstar/pages/login_page.dart';
 import 'package:flutstar/pages/navigation_page.dart';
 import 'package:flutstar/pages/signup_page.dart';
 import 'package:flutstar/pages/verifyemail_page.dart';
@@ -5,7 +6,7 @@ import 'package:flutstar/services/auth/auth_service.dart';
 import 'package:flutstar/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'pages/login_page.dart';
+
 
 void main() async {
   // To use firebase in our app this is must with platform options.
