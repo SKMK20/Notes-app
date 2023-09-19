@@ -16,7 +16,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         body: Stack(
           alignment: Alignment.center,
@@ -34,41 +34,37 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 const Expanded(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 40, right: 210),
-                        child: Text(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(10, 40, 10, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
                           'FlutStar Name',
                           style: TextStyle(
                               fontSize: 23, fontWeight: FontWeight.w500),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(right: 280),
-                        child: Text(
+                        Text(
                           '@Username',
                         ),
-                      ),
-                      TabBar(
-                        tabs: [
-                          Tab(text: 'Photos'),
-                          Tab(text: 'Videos'),
-                          Tab(text: 'Articles'),
-                          Tab(text: 'Stats'),
-                        ],
-                      ),
-                      Expanded(
-                        child: TabBarView(
-                          children: [
-                            Center(child: Text('Posts here')),
-                            Center(child: Text('Videos here')),
-                            Center(child: Text('Articles here')),
-                            Center(child: Text('Stats here')),
+                        TabBar(
+                          tabs: [
+                            Tab(text: 'Photos'),
+                            Tab(text: 'Videos'),
+                            Tab(text: 'Articles'),
                           ],
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          child: TabBarView(
+                            children: [
+                              Center(child: Text('Posts here')),
+                              Center(child: Text('Videos here')),
+                              Center(child: Text('Articles here')),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 )
               ],

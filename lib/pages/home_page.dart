@@ -27,12 +27,12 @@ class _HomePageState extends State<HomePage> {
           text: const TextSpan(
             text: 'Welcome,',
             style: TextStyle(
-                fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black),
+                fontSize: 17, fontWeight: FontWeight.w500, color: Colors.black),
             children: [
               TextSpan(
                 text: '\nFlutStar Name',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 19,
                   fontWeight: FontWeight.w600,
                 ),
               ),
