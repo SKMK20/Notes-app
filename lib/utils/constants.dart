@@ -18,6 +18,7 @@ const signupRoute = '/signup/';
 const navigationRoute = '/navigation/';
 const verifyEmailRoute = '/verify-email/';
 
+
 // For snackbar messages
 void showSnackbar(BuildContext context, String msg) {
   ScaffoldMessenger.of(context).showSnackBar(

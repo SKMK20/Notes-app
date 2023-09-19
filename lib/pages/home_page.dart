@@ -40,13 +40,19 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
 
-        // Notification Icon button
+        
         actions: [
+          // Notification Icon button
           IconButton(
             onPressed: () {},
             icon: const Icon(
               CupertinoIcons.bell,
             ),
+          ),
+          // NotesPage Icon button
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(CupertinoIcons.news_solid),
           ),
         ],
       ),
