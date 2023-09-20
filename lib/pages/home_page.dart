@@ -1,4 +1,3 @@
-import 'package:flutstar/pages/notes/notes_page.dart';
 import 'package:flutstar/services/auth/auth_service.dart';
 import 'package:flutstar/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
