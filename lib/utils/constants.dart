@@ -17,6 +17,8 @@ const loginRoute = '/login/';
 const signupRoute = '/signup/';
 const navigationRoute = '/navigation/';
 const verifyEmailRoute = '/verify-email/';
+const notesRoute = '/notes/';
+const newNoteRoute = '/notes/new-note/';
 
 
 // For snackbar messages

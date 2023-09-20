@@ -1,5 +1,7 @@
 import 'package:flutstar/services/auth/auth_service.dart';
 import 'package:flutstar/services/crud/notes_service.dart';
+import 'package:flutstar/utils/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NotesPage extends StatefulWidget {
@@ -29,7 +31,10 @@ class _NotesPageState extends State<NotesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notes'),
+        title: const Text(
+          'My Notes',
+          style: TextStyle(fontWeight: FontWeight.w500),
+        ),
       ),
       body: FutureBuilder(
         future: _notesService.getOrCreateUser(email: userEmail),
@@ -53,6 +58,16 @@ class _NotesPageState extends State<NotesPage> {
               return const Center(child: CircularProgressIndicator());
           }
         },
+      ),
+      // Floating action button
+      floatingActionButton: FloatingActionButton(
+        shape: const CircleBorder(),
+        onPressed: () {
+          Navigator.of(context).pushNamed(newNoteRoute);
+        },
+        backgroundColor: Colors.deepPurple.shade200,
+        elevation: 2,
+        child: const Icon(CupertinoIcons.add, color: Colors.black),
       ),
     );
   }
