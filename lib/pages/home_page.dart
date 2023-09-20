@@ -1,3 +1,5 @@
+import 'package:flutstar/pages/notes_page.dart';
+import 'package:flutstar/services/auth/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String get userEmail => AuthService.firebase().currentUser!.email!;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +43,6 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-
-        
         actions: [
           // Notification Icon button
           IconButton(
@@ -51,7 +53,10 @@ class _HomePageState extends State<HomePage> {
           ),
           // NotesPage Icon button
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const NotesPage()));
+            },
             icon: const Icon(CupertinoIcons.news_solid),
           ),
         ],
