@@ -57,6 +57,7 @@ class _NotesPageState extends State<NotesPage> {
                 builder: (context, snapshot) {
                   switch (snapshot.connectionState) {
                     case ConnectionState.waiting:
+                    case ConnectionState.active:
                       return const Text('waiting for all notes to appear...');
                     default:
                       return const Center(
