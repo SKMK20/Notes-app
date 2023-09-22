@@ -1,6 +1,7 @@
 import 'package:flutstar/services/auth/auth_service.dart';
 import 'package:flutstar/services/crud/notes_service.dart';
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
 
 class NewNotePage extends StatefulWidget {
   const NewNotePage({super.key});
