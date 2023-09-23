@@ -1,3 +1,4 @@
+import 'package:flutstar/pages/notes/notes_list_view.dart';
 import 'package:flutstar/services/auth/auth_service.dart';
 import 'package:flutstar/services/crud/notes_service.dart';
 import 'package:flutstar/utils/constants.dart';
@@ -54,20 +55,11 @@ class _NotesPageState extends State<NotesPage> {
                     case ConnectionState.active:
                       if (snapshot.hasData) {
                         final allNotes = snapshot.data as List<DatabaseNote>;
-                        return ListView.builder(
-                          itemCount: allNotes.length,
-                          itemBuilder: (context, index) {
-                            final note = allNotes[index];
-                            return ListTile(
-                              title: Text(
-                                note.text,
-                                maxLines: 1,
-                                softWrap: true,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            );
-                          },
-                        );
+                        return NotesListView(
+                            notes: allNotes,
+                            onDeleteNote: (note) async {
+                              await _notesService.deleteNote(id: note.id);
+                            });
                       } else {
                         return const Center(child: CircularProgressIndicator());
                       }
