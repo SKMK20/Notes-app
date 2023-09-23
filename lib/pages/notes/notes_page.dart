@@ -56,10 +56,17 @@ class _NotesPageState extends State<NotesPage> {
                       if (snapshot.hasData) {
                         final allNotes = snapshot.data as List<DatabaseNote>;
                         return NotesListView(
-                            notes: allNotes,
-                            onDeleteNote: (note) async {
-                              await _notesService.deleteNote(id: note.id);
-                            });
+                          notes: allNotes,
+                          onDeleteNote: (note) async {
+                            await _notesService.deleteNote(id: note.id);
+                          },
+                          onTap: (note) {
+                            Navigator.of(context).pushNamed(
+                              createOrUpdateNoteRoute,
+                              arguments: note,
+                            );
+                          },
+                        );
                       } else {
                         return const Center(child: CircularProgressIndicator());
                       }
@@ -80,7 +87,7 @@ class _NotesPageState extends State<NotesPage> {
         padding: const EdgeInsets.only(bottom: 5, right: 5),
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.of(context).pushNamed(newNoteRoute);
+            Navigator.of(context).pushNamed(createOrUpdateNoteRoute);
           },
           backgroundColor: Colors.deepPurple.shade200,
           elevation: 2,

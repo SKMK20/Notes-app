@@ -1,6 +1,6 @@
 import 'package:flutstar/pages/login_page.dart';
 import 'package:flutstar/pages/navigation_page.dart';
-import 'package:flutstar/pages/notes/new_note_page.dart';
+import 'package:flutstar/pages/notes/create_update_note_page.dart';
 import 'package:flutstar/pages/notes/notes_page.dart';
 import 'package:flutstar/pages/signup_page.dart';
 import 'package:flutstar/pages/verifyemail_page.dart';
@@ -55,7 +55,7 @@ void main() async {
         navigationRoute: (context) => const NavigationPage(),
         verifyEmailRoute: (context) => const VerifyEmailPage(),
         notesRoute: (context) => const NotesPage(),
-        newNoteRoute: (context) => const NewNotePage(),
+        createOrUpdateNoteRoute: (context) => const CreateUpdateNotePage(),
       },
     ),
   );
