@@ -1,4 +1,3 @@
-import 'package:flutstar/services/auth/auth_service.dart';
 import 'package:flutstar/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +10,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String get userEmail => AuthService.firebase().currentUser!.email!;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
