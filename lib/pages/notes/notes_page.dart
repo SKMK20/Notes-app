@@ -38,7 +38,7 @@ class _NotesPageState extends State<NotesPage> {
           IconButton(
             onPressed: () {},
             icon: const Icon(
-              CupertinoIcons.ellipsis_vertical,
+              Icons.more_vert_rounded,
             ),
           ),
         ],
