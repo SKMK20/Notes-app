@@ -1,7 +1,7 @@
-
-import 'package:flutstar/services/auth/auth_service.dart';
-import 'package:flutstar/utils/constants.dart';
+import 'package:flutstar/services/auth/bloc/auth_bloc.dart';
+import 'package:flutstar/services/auth/bloc/auth_event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 enum ProfileMenuAction { settings, editProfile, signOut }
 
@@ -92,10 +92,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     case ProfileMenuAction.signOut:
                       final shouldSignOut = await showSignOutDialog(context);
                       if (shouldSignOut) {
-                        await AuthService.firebase().logOut();
+                        // await AuthService.firebase().logOut();
                         if (!mounted) return;
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            loginRoute, (route) => false);
+                        context.read<AuthBloc>().add(const AuthEventLogOut());
+
+                        // Navigator.of(context).pushNamedAndRemoveUntil(
+                        //     loginRoute, (route) => false);
                       }
                     default:
                       null;
