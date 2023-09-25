@@ -3,10 +3,10 @@ import 'package:flutstar/firebase_options.dart';
 import 'package:flutstar/services/auth/auth_user.dart';
 import 'package:flutstar/services/auth/auth_provider.dart';
 import 'package:flutstar/services/auth/auth_exceptions.dart';
-import 'package:firebase_auth/firebase_auth.dart'
-    show FirebaseAuth, FirebaseAuthException;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart'
+    show FirebaseAuth, FirebaseAuthException;
 
 class FirebaseAuthProvider implements AuthProvider {
   @override

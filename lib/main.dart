@@ -1,3 +1,4 @@
+import 'package:flutstar/helpers/loading/loading_page.dart';
 import 'package:flutstar/pages/login_page.dart';
 import 'package:flutstar/pages/navigation_page.dart';
 import 'package:flutstar/pages/notes/create_update_note_page.dart';
@@ -48,7 +49,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     context.read<AuthBloc>().add(const AuthEventInitialize());
-    return BlocBuilder<AuthBloc, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state.isLoading) {
+          LoadingScreen().show(
+            context: context,
+            text: state.loadingText ?? 'Please give us a moment',
+          );
+        } else {
+          LoadingScreen().hide();
+        }
+      },
       builder: (context, state) {
         if (state is AuthStateLoggedIn) {
           return const NavigationPage();
