@@ -43,7 +43,8 @@ class _LoginPageState extends State<LoginPage> {
       listener: (context, state) async {
         if (state is AuthStateLoggedOut) {
           if (state.exception is UserNotFoundAuthException) {
-            await showErrorDialog(context, 'User not found');
+            await showErrorDialog(
+                context, 'Cannot find a user with entered credentials!');
           } else if (state.exception is WrongPasswordAuthException) {
             await showErrorDialog(context, 'Wrong password');
           } else if (state.exception is InvalidEmailAuthException) {
@@ -254,6 +255,14 @@ class _LoginPageState extends State<LoginPage> {
                                   TextStyle(color: Colors.white, fontSize: 16),
                             ),
                           ),
+                          Container(height: 10),
+                          TextButton(
+                              onPressed: () {
+                                context.read<AuthBloc>().add(
+                                      const AuthEventForgotPassword(),
+                                    );
+                              },
+                              child: const Text('Forgot Password?')),
                           Container(height: 10),
                           const Divider(thickness: 1),
                           Container(height: 10),

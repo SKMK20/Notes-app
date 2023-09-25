@@ -1,4 +1,5 @@
 import 'package:flutstar/helpers/loading/loading_page.dart';
+import 'package:flutstar/pages/forgot_password_page.dart';
 import 'package:flutstar/pages/login_page.dart';
 import 'package:flutstar/pages/navigation_page.dart';
 import 'package:flutstar/pages/notes/create_update_note_page.dart';
@@ -67,6 +68,8 @@ class _HomePageState extends State<HomePage> {
           return const VerifyEmailPage();
         } else if (state is AuthStateLoggedOut) {
           return const LoginPage();
+        } else if (state is AuthStateForgotPassword) {
+          return const ForgotPasswordPage();
         } else if (state is AuthStateRegistering) {
           return const SignUpPage();
         } else {
