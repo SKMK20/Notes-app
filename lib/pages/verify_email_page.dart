@@ -1,7 +1,7 @@
-import 'package:flutstar/services/auth/auth_service.dart';
-import 'package:flutstar/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutstar/services/auth/bloc/auth_bloc.dart';
+import 'package:flutstar/services/auth/bloc/auth_event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({super.key});
@@ -15,13 +15,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil(signupRoute, (route) => false);
-          },
-          icon: const Icon(CupertinoIcons.back),
-        ),
+        title: const Text('Verify your email'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -31,19 +25,18 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
           const Text(
               'If you haven\' received a verification mail yet.\npress the button below'),
           ElevatedButton(
-            onPressed: () async {
-              await AuthService.firebase().sendEmailVerification();
+            onPressed: () {
+              context
+                  .read<AuthBloc>()
+                  .add(const AuthEventSendEmailVerification());
             },
             child: const Text('Send link'),
           ),
           const Text(
               'After successful verification of email, now try to login'),
           ElevatedButton(
-            onPressed: () async {
-              await AuthService.firebase().logOut();
-              if (!mounted) return;
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil(loginRoute, (route) => false);
+            onPressed: () {
+              context.read<AuthBloc>().add(const AuthEventLogOut());
             },
             child: const Text('Log in'),
           ),

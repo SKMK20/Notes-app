@@ -1,28 +1,17 @@
 import 'package:flutstar/pages/login_page.dart';
 import 'package:flutstar/pages/navigation_page.dart';
 import 'package:flutstar/pages/notes/create_update_note_page.dart';
-import 'package:flutstar/pages/notes/notes_page.dart';
 import 'package:flutstar/pages/signup_page.dart';
-import 'package:flutstar/pages/verifyemail_page.dart';
-import 'package:flutstar/services/auth/auth_service.dart';
+import 'package:flutstar/pages/verify_email_page.dart';
 import 'package:flutstar/services/auth/bloc/auth_bloc.dart';
 import 'package:flutstar/services/auth/bloc/auth_event.dart';
 import 'package:flutstar/services/auth/bloc/auth_state.dart';
 import 'package:flutstar/services/auth/firebase_auth_provider.dart';
 import 'package:flutstar/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
-  // To use firebase in our app this is must with platform options.
-  WidgetsFlutterBinding.ensureInitialized();
-  AuthService.firebase().initialize();
-
-  // To avoid auto rotation in devices.
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
   // This widget is the root of your application.
   runApp(
     MaterialApp(
@@ -37,11 +26,11 @@ void main() async {
         child: const HomePage(),
       ),
       routes: {
-        loginRoute: (context) => const LoginPage(),
-        signupRoute: (context) => const SignUpPage(),
-        navigationRoute: (context) => const NavigationPage(),
-        verifyEmailRoute: (context) => const VerifyEmailPage(),
-        notesRoute: (context) => const NotesPage(),
+        // loginRoute: (context) => const LoginPage(),
+        // signupRoute: (context) => const SignUpPage(),
+        // navigationRoute: (context) => const NavigationPage(),
+        // verifyEmailRoute: (context) => const VerifyEmailPage(),
+        // notesRoute: (context) => const NotesPage(),
         createOrUpdateNoteRoute: (context) => const CreateUpdateNotePage(),
       },
     ),
@@ -67,6 +56,8 @@ class _HomePageState extends State<HomePage> {
           return const VerifyEmailPage();
         } else if (state is AuthStateLoggedOut) {
           return const LoginPage();
+        } else if (state is AuthStateRegistering) {
+          return const SignUpPage();
         } else {
           return const Scaffold(
             body: Center(

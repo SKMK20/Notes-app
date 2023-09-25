@@ -13,13 +13,12 @@ List<Widget> navigationItems = [
 ];
 
 // Routes
-const loginRoute = '/login/';
-const signupRoute = '/signup/';
-const navigationRoute = '/navigation/';
-const verifyEmailRoute = '/verify-email/';
-const notesRoute = '/notes/';
+// const loginRoute = '/login/';
+// const signupRoute = '/signup/';
+// const navigationRoute = '/navigation/';
+// const verifyEmailRoute = '/verify-email/';
+// const notesRoute = '/notes/';
 const createOrUpdateNoteRoute = '/notes/new-note/';
-
 
 // For snackbar messages
 void showSnackbar(BuildContext context, String msg) {

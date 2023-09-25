@@ -1,4 +1,4 @@
-import 'package:flutstar/utils/constants.dart';
+import 'package:flutstar/pages/notes/notes_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +51,12 @@ class _FeedPageState extends State<FeedPage> {
           // NotesPage Icon button
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(notesRoute);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotesPage(),
+                ),
+              );
             },
             icon: const Icon(CupertinoIcons.news_solid),
           ),
