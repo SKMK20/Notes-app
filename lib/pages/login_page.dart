@@ -1,6 +1,7 @@
 import 'package:flutstar/services/auth/auth_exceptions.dart';
 import 'package:flutstar/services/auth/bloc/auth_bloc.dart';
 import 'package:flutstar/services/auth/bloc/auth_event.dart';
+import 'package:flutstar/services/auth/bloc/auth_state.dart';
 import 'package:flutstar/utils/constants.dart';
 import 'package:flutstar/utils/dialogs/error_dialog.dart';
 import 'package:flutter/cupertino.dart';
@@ -184,55 +185,85 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         Container(height: 20),
-                        ElevatedButton(
-                          onPressed: () async {
-                            if (_loginformKey.currentState!.validate()) {
-                              final email = _email.text;
-                              final password = _password.text;
-                              try {
-                                // await AuthService.firebase().logIn(
-                                //   email: email,
-                                //   password: password,
-                                // );
-                                // final user = AuthService.firebase().currentUser;
-                                // if (user?.isEmailVerified ?? false) {
-                                //   if (!mounted) return;
-                                //   Navigator.of(context).pushNamedAndRemoveUntil(
-                                //       navigationRoute, (route) => false);
-                                // } else {
-                                //   if (!mounted) return;
-                                //   Navigator.of(context).pushNamedAndRemoveUntil(
-                                //       verifyEmailRoute, (route) => false);
-                                // }
-                                context.read<AuthBloc>().add(AuthEventLogIn(
-                                      email,
-                                      password,
-                                    ));
-                              } on UserNotFoundAuthException {
+                        BlocListener<AuthBloc, AuthState>(
+                          listener: (context, state) async {
+                            if (state is AuthStateLoggedOut) {
+                              if (state.exception
+                                  is UserNotFoundAuthException) {
                                 await showErrorDialog(
                                     context, 'User not found');
-                              } on WrongPasswordAuthException {
+                              } else if (state.exception
+                                  is WrongPasswordAuthException) {
                                 await showErrorDialog(
                                     context, 'Wrong password');
-                              } on InvalidEmailAuthException {
+                              } else if (state.exception
+                                  is InvalidEmailAuthException) {
                                 await showErrorDialog(context, 'Invalid email');
-                              } on UserDisabledAuthException {
+                              } else if (state.exception
+                                  is UserDisabledAuthException) {
                                 await showErrorDialog(
                                     context, 'This email is no longer in use');
-                              } on GenericAuthException {
+                              } else if (state.exception
+                                  is GenericAuthException) {
                                 await showErrorDialog(
                                     context, 'Authentication error');
                               }
                             }
                           },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.black87,
-                              elevation: 2,
-                              padding:
-                                  const EdgeInsets.fromLTRB(100, 10, 100, 10)),
-                          child: const Text(
-                            'Login',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (_loginformKey.currentState!.validate()) {
+                                final email = _email.text;
+                                final password = _password.text;
+                                context.read<AuthBloc>().add(
+                                      AuthEventLogIn(
+                                        email,
+                                        password,
+                                      ),
+                                    );
+                                // try {
+                                //   // await AuthService.firebase().logIn(
+                                //   //   email: email,
+                                //   //   password: password,
+                                //   // );
+                                //   // final user = AuthService.firebase().currentUser;
+                                //   // if (user?.isEmailVerified ?? false) {
+                                //   //   if (!mounted) return;
+                                //   //   Navigator.of(context).pushNamedAndRemoveUntil(
+                                //   //       navigationRoute, (route) => false);
+                                //   // } else {
+                                //   //   if (!mounted) return;
+                                //   //   Navigator.of(context).pushNamedAndRemoveUntil(
+                                //   //       verifyEmailRoute, (route) => false);
+                                //   // }
+                                // } on UserNotFoundAuthException {
+                                //   await showErrorDialog(
+                                //       context, 'User not found');
+                                // } on WrongPasswordAuthException {
+                                //   await showErrorDialog(
+                                //       context, 'Wrong password');
+                                // } on InvalidEmailAuthException {
+                                //   await showErrorDialog(
+                                //       context, 'Invalid email');
+                                // } on UserDisabledAuthException {
+                                //   await showErrorDialog(context,
+                                //       'This email is no longer in use');
+                                // } on GenericAuthException {
+                                //   await showErrorDialog(
+                                //       context, 'Authentication error');
+                                // }
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.black87,
+                                elevation: 2,
+                                padding: const EdgeInsets.fromLTRB(
+                                    100, 10, 100, 10)),
+                            child: const Text(
+                              'Login',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            ),
                           ),
                         ),
                         Container(height: 10),
