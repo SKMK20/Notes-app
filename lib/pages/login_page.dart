@@ -1,3 +1,4 @@
+import 'package:flutstar/extensions/list/build/loc.dart';
 import 'package:flutstar/services/auth/auth_exceptions.dart';
 import 'package:flutstar/services/auth/bloc/auth_bloc.dart';
 import 'package:flutstar/services/auth/bloc/auth_event.dart';
@@ -44,15 +45,15 @@ class _LoginPageState extends State<LoginPage> {
         if (state is AuthStateLoggedOut) {
           if (state.exception is UserNotFoundAuthException) {
             await showErrorDialog(
-                context, 'Cannot find a user with entered credentials!');
+                context, context.loc.login_error_cannot_find_user);
           } else if (state.exception is WrongPasswordAuthException) {
-            await showErrorDialog(context, 'Wrong password');
+            await showErrorDialog(context, context.loc.login_error_wrong_credentials);
           } else if (state.exception is InvalidEmailAuthException) {
             await showErrorDialog(context, 'Invalid email');
           } else if (state.exception is UserDisabledAuthException) {
             await showErrorDialog(context, 'This email is no longer in use');
           } else if (state.exception is GenericAuthException) {
-            await showErrorDialog(context, 'Authentication error');
+            await showErrorDialog(context, context.loc.login_error_auth_error);
           }
         }
       },
@@ -128,16 +129,16 @@ class _LoginPageState extends State<LoginPage> {
                                 TextFormField(
                                   controller: _email,
                                   keyboardType: TextInputType.emailAddress,
-                                  decoration: const InputDecoration(
-                                    border: OutlineInputBorder(
+                                  decoration: InputDecoration(
+                                    border: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(50),
                                       ),
                                     ),
                                     contentPadding:
-                                        EdgeInsets.fromLTRB(20, 10, 20, 10),
-                                    prefixIcon: Icon(CupertinoIcons.mail_solid),
-                                    label: Text('Email'),
+                                        const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                                    prefixIcon: const Icon(CupertinoIcons.mail_solid),
+                                    label: Text(context.loc.email_text_field_placeholder),
                                   ),
                                   enableSuggestions: false,
                                   autocorrect: false,
@@ -180,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
                                               ? Icons.visibility_off
                                               : Icons.visibility,
                                         )),
-                                    label: const Text('Password'),
+                                    label: Text(context.loc.password_text_field_placeholder),
                                   ),
                                   enableSuggestions: false,
                                   autocorrect: false,
@@ -249,10 +250,10 @@ class _LoginPageState extends State<LoginPage> {
                                 elevation: 2,
                                 padding: const EdgeInsets.fromLTRB(
                                     100, 10, 100, 10)),
-                            child: const Text(
-                              'Login',
+                            child: Text(
+                              context.loc.login,
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 16),
+                                  const TextStyle(color: Colors.white, fontSize: 16),
                             ),
                           ),
                           Container(height: 10),

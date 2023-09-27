@@ -12,11 +12,14 @@ import 'package:flutstar/services/auth/firebase_auth_provider.dart';
 import 'package:flutstar/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 void main() async {
   // This widget is the root of your application.
   runApp(
     MaterialApp(
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       debugShowCheckedModeBanner: false,
       title: 'FlutStar',
       theme: ThemeData(
