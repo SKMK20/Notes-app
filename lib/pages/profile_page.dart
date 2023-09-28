@@ -1,5 +1,6 @@
 import 'package:flutstar/services/auth/bloc/auth_bloc.dart';
 import 'package:flutstar/services/auth/bloc/auth_event.dart';
+import 'package:flutstar/widgets/followers_following.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,28 +35,49 @@ class _ProfilePageState extends State<ProfilePage> {
                         fit: BoxFit.cover),
                   ),
                 ),
-                const Expanded(
+                Expanded(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(10, 40, 10, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 40, 10, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'FlutStar Name',
                           style: TextStyle(
                               fontSize: 23, fontWeight: FontWeight.w500),
                         ),
-                        Text(
-                          '@Username',
+                        // Divider
+                        const Padding(
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          child: Divider(
+                            thickness: 0.1,
+                          ),
                         ),
-                        TabBar(
+                        // Following, Followers, Posts and Stars
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            buildStatsColumn(1222200, 'Following'),
+                            buildStatsColumn(2000600, 'Followers'),
+                            buildStatsColumn(30000, 'Posts'),
+                            buildStatsColumn(2200000000, 'Stars'),
+                          ],
+                        ),
+                        // Divider
+                        const Padding(
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          child: Divider(
+                            thickness: 0.1,
+                          ),
+                        ),
+                        const TabBar(
                           tabs: [
                             Tab(text: 'Photos'),
                             Tab(text: 'Videos'),
                             Tab(text: 'Articles'),
                           ],
                         ),
-                        Expanded(
+                        const Expanded(
                           child: TabBarView(
                             children: [
                               Center(child: Text('Posts here')),
